@@ -1,0 +1,6471 @@
+exports[`operand input handling > accepts decimal and binary operands interchangeably 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "13",
+    "binary": "00001101",
+    "grouped": "0000 1101"
+  },
+  "multiplier": {
+    "decimal": "11",
+    "binary": "00001011",
+    "grouped": "0000 1011"
+  },
+  "product": {
+    "decimal": "143",
+    "binary": "0000000010001111",
+    "grouped": "0000 0000 1000 1111"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001011",
+      "m": "00001101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 11, M holds the multiplicand magnitude 13. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00001101",
+      "q": "00001011",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000110",
+      "q": "10000101",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00010011",
+      "q": "10000101",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001001",
+      "q": "11000010",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001001",
+      "q": "11000010",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "11100001",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00010001",
+      "q": "11100001",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001000",
+      "q": "11110000",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001000",
+      "q": "11110000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "01111000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000100",
+      "q": "01111000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "00111100",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000010",
+      "q": "00111100",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "00011110",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "00011110",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10001111",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "13 x 11 = 143",
+  "halves": {
+    "a": "00000000",
+    "q": "10001111"
+  }
+}
+`;
+
+exports[`operand input handling > accepts decimal and binary operands interchangeably 2`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "13",
+    "binary": "00001101",
+    "grouped": "0000 1101"
+  },
+  "multiplier": {
+    "decimal": "11",
+    "binary": "00001011",
+    "grouped": "0000 1011"
+  },
+  "product": {
+    "decimal": "143",
+    "binary": "0000000010001111",
+    "grouped": "0000 0000 1000 1111"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001011",
+      "m": "00001101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 11, M holds the multiplicand magnitude 13. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00001101",
+      "q": "00001011",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000110",
+      "q": "10000101",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00010011",
+      "q": "10000101",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001001",
+      "q": "11000010",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001001",
+      "q": "11000010",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "11100001",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00010001",
+      "q": "11100001",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001000",
+      "q": "11110000",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001000",
+      "q": "11110000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "01111000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000100",
+      "q": "01111000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "00111100",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000010",
+      "q": "00111100",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "00011110",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "00011110",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10001111",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "13 x 11 = 143",
+  "halves": {
+    "a": "00000000",
+    "q": "10001111"
+  }
+}
+`;
+
+exports[`operand input handling > reads a binary operand as negative in signed mode 1`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "-5",
+    "binary": "11111011",
+    "grouped": "1111 1011"
+  },
+  "multiplier": {
+    "decimal": "3",
+    "binary": "00000011",
+    "grouped": "0000 0011"
+  },
+  "product": {
+    "decimal": "-15",
+    "binary": "1111111111110001",
+    "grouped": "1111 1111 1111 0001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 3, M holds the multiplicand magnitude 5. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000101",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000111",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": null,
+      "note": "Product magnitude 15 takes the negative sign, because the operand signs differ."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": true,
+    "multiplierNegative": false,
+    "productNegative": true,
+    "magnitudes": {
+      "multiplicand": "5",
+      "multiplier": "3"
+    }
+  },
+  "summary": "-5 x 3 = -15",
+  "halves": {
+    "a": "00000000",
+    "q": "00001111"
+  }
+}
+`;
+
+exports[`sequential multiplier — normal cases > multiplies 13 x 11 in 8 bits 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "13",
+    "binary": "00001101",
+    "grouped": "0000 1101"
+  },
+  "multiplier": {
+    "decimal": "11",
+    "binary": "00001011",
+    "grouped": "0000 1011"
+  },
+  "product": {
+    "decimal": "143",
+    "binary": "0000000010001111",
+    "grouped": "0000 0000 1000 1111"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001011",
+      "m": "00001101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 11, M holds the multiplicand magnitude 13. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00001101",
+      "q": "00001011",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000110",
+      "q": "10000101",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00010011",
+      "q": "10000101",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001001",
+      "q": "11000010",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001001",
+      "q": "11000010",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "11100001",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00010001",
+      "q": "11100001",
+      "m": "00001101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001000",
+      "q": "11110000",
+      "m": "00001101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001000",
+      "q": "11110000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "01111000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000100",
+      "q": "01111000",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "00111100",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000010",
+      "q": "00111100",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "00011110",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "00011110",
+      "m": "00001101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10001111",
+      "m": "00001101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "13 x 11 = 143",
+  "halves": {
+    "a": "00000000",
+    "q": "10001111"
+  }
+}
+`;
+
+exports[`sequential multiplier — normal cases > multiplies the largest 8-bit operands 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "255",
+    "binary": "11111111",
+    "grouped": "1111 1111"
+  },
+  "multiplier": {
+    "decimal": "255",
+    "binary": "11111111",
+    "grouped": "1111 1111"
+  },
+  "product": {
+    "decimal": "65025",
+    "binary": "1111111000000001",
+    "grouped": "1111 1110 0000 0001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "11111111",
+      "m": "11111111",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 255, M holds the multiplicand magnitude 255. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "11111111",
+      "q": "11111111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "01111111",
+      "q": "11111111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "01111110",
+      "q": "11111111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "10111111",
+      "q": "01111111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "10111110",
+      "q": "01111111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11011111",
+      "q": "00111111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "11011110",
+      "q": "00111111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11101111",
+      "q": "00011111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "11101110",
+      "q": "00011111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11110111",
+      "q": "00001111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "11110110",
+      "q": "00001111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11111011",
+      "q": "00000111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "11111010",
+      "q": "00000111",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11111101",
+      "q": "00000011",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "11111100",
+      "q": "00000011",
+      "m": "11111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11111110",
+      "q": "00000001",
+      "m": "11111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "255 x 255 = 65025",
+  "halves": {
+    "a": "11111110",
+    "q": "00000001"
+  }
+}
+`;
+
+exports[`sequential multiplier — special and edge cases > handles a zero operand 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "0",
+    "binary": "00000000",
+    "grouped": "0000 0000"
+  },
+  "multiplier": {
+    "decimal": "200",
+    "binary": "11001000",
+    "grouped": "1100 1000"
+  },
+  "product": {
+    "decimal": "0",
+    "binary": "0000000000000000",
+    "grouped": "0000 0000 0000 0000"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "11001000",
+      "m": "00000000",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 200, M holds the multiplicand magnitude 0. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11001000",
+      "m": "00000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01100100",
+      "m": "00000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01100100",
+      "m": "00000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00110010",
+      "m": "00000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00110010",
+      "m": "00000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011001",
+      "m": "00000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011001",
+      "m": "00000000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001100",
+      "m": "00000000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001100",
+      "m": "00000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000110",
+      "m": "00000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000110",
+      "m": "00000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000001",
+      "m": "00000000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000001",
+      "m": "00000000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "00000000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "0 x 200 = 0",
+  "halves": {
+    "a": "00000000",
+    "q": "00000000"
+  }
+}
+`;
+
+exports[`sequential multiplier — special and edge cases > handles a zero operand 2`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "200",
+    "binary": "11001000",
+    "grouped": "1100 1000"
+  },
+  "multiplier": {
+    "decimal": "0",
+    "binary": "00000000",
+    "grouped": "0000 0000"
+  },
+  "product": {
+    "decimal": "0",
+    "binary": "0000000000000000",
+    "grouped": "0000 0000 0000 0000"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 0, M holds the multiplicand magnitude 200. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000000",
+      "m": "11001000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "200 x 0 = 0",
+  "halves": {
+    "a": "00000000",
+    "q": "00000000"
+  }
+}
+`;
+
+exports[`sequential multiplier — special and edge cases > handles multiplication by one 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "1",
+    "binary": "00000001",
+    "grouped": "0000 0001"
+  },
+  "multiplier": {
+    "decimal": "173",
+    "binary": "10101101",
+    "grouped": "1010 1101"
+  },
+  "product": {
+    "decimal": "173",
+    "binary": "0000000010101101",
+    "grouped": "0000 0000 1010 1101"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "10101101",
+      "m": "00000001",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 173, M holds the multiplicand magnitude 1. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000001",
+      "q": "10101101",
+      "m": "00000001",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11010110",
+      "m": "00000001",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11010110",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01101011",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000001",
+      "q": "01101011",
+      "m": "00000001",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10110101",
+      "m": "00000001",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000001",
+      "q": "10110101",
+      "m": "00000001",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11011010",
+      "m": "00000001",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11011010",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01101101",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000001",
+      "q": "01101101",
+      "m": "00000001",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10110110",
+      "m": "00000001",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "10110110",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01011011",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000001",
+      "q": "01011011",
+      "m": "00000001",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10101101",
+      "m": "00000001",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "1 x 173 = 173",
+  "halves": {
+    "a": "00000000",
+    "q": "10101101"
+  }
+}
+`;
+
+exports[`sequential multiplier — special and edge cases > handles multiplication by one 2`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "173",
+    "binary": "10101101",
+    "grouped": "1010 1101"
+  },
+  "multiplier": {
+    "decimal": "1",
+    "binary": "00000001",
+    "grouped": "0000 0001"
+  },
+  "product": {
+    "decimal": "173",
+    "binary": "0000000010101101",
+    "grouped": "0000 0000 1010 1101"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000001",
+      "m": "10101101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 1, M holds the multiplicand magnitude 173. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "10101101",
+      "q": "00000001",
+      "m": "10101101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "01010110",
+      "q": "10000000",
+      "m": "10101101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "01010110",
+      "q": "10000000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00101011",
+      "q": "01000000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00101011",
+      "q": "01000000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00010101",
+      "q": "10100000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00010101",
+      "q": "10100000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001010",
+      "q": "11010000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001010",
+      "q": "11010000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000101",
+      "q": "01101000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000101",
+      "q": "01101000",
+      "m": "10101101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "10110100",
+      "m": "10101101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000010",
+      "q": "10110100",
+      "m": "10101101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "01011010",
+      "m": "10101101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "01011010",
+      "m": "10101101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10101101",
+      "m": "10101101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "173 x 1 = 173",
+  "halves": {
+    "a": "00000000",
+    "q": "10101101"
+  }
+}
+`;
+
+exports[`sequential multiplier — special and edge cases > handles powers of two, where every iteration but one is a skip 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "1",
+    "binary": "00000001",
+    "grouped": "0000 0001"
+  },
+  "multiplier": {
+    "decimal": "128",
+    "binary": "10000000",
+    "grouped": "1000 0000"
+  },
+  "product": {
+    "decimal": "128",
+    "binary": "0000000010000000",
+    "grouped": "0000 0000 1000 0000"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "00000001",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 128, M holds the multiplicand magnitude 1. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01000000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01000000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00100000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00100000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00010000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00010000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001000",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000100",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000100",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000010",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000010",
+      "m": "00000001",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000001",
+      "m": "00000001",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000001",
+      "q": "00000001",
+      "m": "00000001",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "00000001",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "1 x 128 = 128",
+  "halves": {
+    "a": "00000000",
+    "q": "10000000"
+  }
+}
+`;
+
+exports[`sequential multiplier — special and edge cases > handles the all-ones multiplier, where every iteration adds 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "200",
+    "binary": "11001000",
+    "grouped": "1100 1000"
+  },
+  "multiplier": {
+    "decimal": "255",
+    "binary": "11111111",
+    "grouped": "1111 1111"
+  },
+  "product": {
+    "decimal": "51000",
+    "binary": "1100011100111000",
+    "grouped": "1100 0111 0011 1000"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "11111111",
+      "m": "11001000",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 255, M holds the multiplicand magnitude 200. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "11001000",
+      "q": "11111111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "01100100",
+      "q": "01111111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "00101100",
+      "q": "01111111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "10010110",
+      "q": "00111111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "01011110",
+      "q": "00111111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "10101111",
+      "q": "00011111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "01110111",
+      "q": "00011111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "10111011",
+      "q": "10001111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "10000011",
+      "q": "10001111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11000001",
+      "q": "11000111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "10001001",
+      "q": "11000111",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11000100",
+      "q": "11100011",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "10001100",
+      "q": "11100011",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11000110",
+      "q": "01110001",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "10001110",
+      "q": "01110001",
+      "m": "11001000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "11000111",
+      "q": "00111000",
+      "m": "11001000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "200 x 255 = 51000",
+  "halves": {
+    "a": "11000111",
+    "q": "00111000"
+  }
+}
+`;
+
+exports[`sequential multiplier — special and edge cases > handles the smallest data size 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 2,
+  "productBits": 4,
+  "multiplicand": {
+    "decimal": "3",
+    "binary": "11",
+    "grouped": "11"
+  },
+  "multiplier": {
+    "decimal": "3",
+    "binary": "11",
+    "grouped": "11"
+  },
+  "product": {
+    "decimal": "9",
+    "binary": "1001",
+    "grouped": "1001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00",
+      "q": "11",
+      "m": "11",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 3, M holds the multiplicand magnitude 3. The loop runs 2 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "11",
+      "q": "11",
+      "m": "11",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "01",
+      "q": "11",
+      "m": "11",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "00",
+      "q": "11",
+      "m": "11",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "10",
+      "q": "01",
+      "m": "11",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "3 x 3 = 9",
+  "halves": {
+    "a": "10",
+    "q": "01"
+  }
+}
+`;
+
+exports[`signed multiplication > covers all four sign combinations 1`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "5",
+    "binary": "00000101",
+    "grouped": "0000 0101"
+  },
+  "multiplier": {
+    "decimal": "3",
+    "binary": "00000011",
+    "grouped": "0000 0011"
+  },
+  "product": {
+    "decimal": "15",
+    "binary": "0000000000001111",
+    "grouped": "0000 0000 0000 1111"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 3, M holds the multiplicand magnitude 5. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000101",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000111",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": null,
+      "note": "Product magnitude 15 takes the positive sign, because the operand signs match."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": false,
+    "multiplierNegative": false,
+    "productNegative": false,
+    "magnitudes": {
+      "multiplicand": "5",
+      "multiplier": "3"
+    }
+  },
+  "summary": "5 x 3 = 15",
+  "halves": {
+    "a": "00000000",
+    "q": "00001111"
+  }
+}
+`;
+
+exports[`signed multiplication > covers all four sign combinations 2`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "-5",
+    "binary": "11111011",
+    "grouped": "1111 1011"
+  },
+  "multiplier": {
+    "decimal": "3",
+    "binary": "00000011",
+    "grouped": "0000 0011"
+  },
+  "product": {
+    "decimal": "-15",
+    "binary": "1111111111110001",
+    "grouped": "1111 1111 1111 0001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 3, M holds the multiplicand magnitude 5. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000101",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000111",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": null,
+      "note": "Product magnitude 15 takes the negative sign, because the operand signs differ."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": true,
+    "multiplierNegative": false,
+    "productNegative": true,
+    "magnitudes": {
+      "multiplicand": "5",
+      "multiplier": "3"
+    }
+  },
+  "summary": "-5 x 3 = -15",
+  "halves": {
+    "a": "00000000",
+    "q": "00001111"
+  }
+}
+`;
+
+exports[`signed multiplication > covers all four sign combinations 3`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "5",
+    "binary": "00000101",
+    "grouped": "0000 0101"
+  },
+  "multiplier": {
+    "decimal": "-3",
+    "binary": "11111101",
+    "grouped": "1111 1101"
+  },
+  "product": {
+    "decimal": "-15",
+    "binary": "1111111111110001",
+    "grouped": "1111 1111 1111 0001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 3, M holds the multiplicand magnitude 5. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000101",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000111",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": null,
+      "note": "Product magnitude 15 takes the negative sign, because the operand signs differ."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": false,
+    "multiplierNegative": true,
+    "productNegative": true,
+    "magnitudes": {
+      "multiplicand": "5",
+      "multiplier": "3"
+    }
+  },
+  "summary": "5 x -3 = -15",
+  "halves": {
+    "a": "00000000",
+    "q": "00001111"
+  }
+}
+`;
+
+exports[`signed multiplication > covers all four sign combinations 4`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "-5",
+    "binary": "11111011",
+    "grouped": "1111 1011"
+  },
+  "multiplier": {
+    "decimal": "-3",
+    "binary": "11111101",
+    "grouped": "1111 1101"
+  },
+  "product": {
+    "decimal": "15",
+    "binary": "0000000000001111",
+    "grouped": "0000 0000 0000 1111"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 3, M holds the multiplicand magnitude 5. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000101",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000111",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": null,
+      "note": "Product magnitude 15 takes the positive sign, because the operand signs match."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": true,
+    "multiplierNegative": true,
+    "productNegative": false,
+    "magnitudes": {
+      "multiplicand": "5",
+      "multiplier": "3"
+    }
+  },
+  "summary": "-5 x -3 = 15",
+  "halves": {
+    "a": "00000000",
+    "q": "00001111"
+  }
+}
+`;
+
+exports[`signed multiplication > handles the most negative operands, the widest signed product 1`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "-128",
+    "binary": "10000000",
+    "grouped": "1000 0000"
+  },
+  "multiplier": {
+    "decimal": "-128",
+    "binary": "10000000",
+    "grouped": "1000 0000"
+  },
+  "product": {
+    "decimal": "16384",
+    "binary": "0100000000000000",
+    "grouped": "0100 0000 0000 0000"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "10000000",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 128, M holds the multiplicand magnitude 128. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00100000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00100000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00010000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00010000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000100",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000100",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000010",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000010",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000001",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "10000000",
+      "q": "00000001",
+      "m": "10000000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "01000000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "01000000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": null,
+      "note": "Product magnitude 16384 takes the positive sign, because the operand signs match."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": true,
+    "multiplierNegative": true,
+    "productNegative": false,
+    "magnitudes": {
+      "multiplicand": "128",
+      "multiplier": "128"
+    }
+  },
+  "summary": "-128 x -128 = 16384",
+  "halves": {
+    "a": "01000000",
+    "q": "00000000"
+  }
+}
+`;
+
+exports[`signed multiplication > handles the most negative operands, the widest signed product 2`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "-128",
+    "binary": "10000000",
+    "grouped": "1000 0000"
+  },
+  "multiplier": {
+    "decimal": "1",
+    "binary": "00000001",
+    "grouped": "0000 0001"
+  },
+  "product": {
+    "decimal": "-128",
+    "binary": "1111111110000000",
+    "grouped": "1111 1111 1000 0000"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000001",
+      "m": "10000000",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 1, M holds the multiplicand magnitude 128. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "10000000",
+      "q": "00000001",
+      "m": "10000000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "01000000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "01000000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00100000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00100000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00010000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00010000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000100",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000010",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "10000000",
+      "q0": null,
+      "note": "Product magnitude 128 takes the negative sign, because the operand signs differ."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": true,
+    "multiplierNegative": false,
+    "productNegative": true,
+    "magnitudes": {
+      "multiplicand": "128",
+      "multiplier": "1"
+    }
+  },
+  "summary": "-128 x 1 = -128",
+  "halves": {
+    "a": "00000000",
+    "q": "10000000"
+  }
+}
+`;
+
+exports[`signed multiplication > handles the most negative operands, the widest signed product 3`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "-128",
+    "binary": "10000000",
+    "grouped": "1000 0000"
+  },
+  "multiplier": {
+    "decimal": "-1",
+    "binary": "11111111",
+    "grouped": "1111 1111"
+  },
+  "product": {
+    "decimal": "128",
+    "binary": "0000000010000000",
+    "grouped": "0000 0000 1000 0000"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000001",
+      "m": "10000000",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 1, M holds the multiplicand magnitude 128. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "10000000",
+      "q": "00000001",
+      "m": "10000000",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "01000000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "01000000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00100000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00100000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00010000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00010000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00001000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00001000",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000100",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000100",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000010",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "00000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "10000000",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "10000000",
+      "m": "10000000",
+      "q0": null,
+      "note": "Product magnitude 128 takes the positive sign, because the operand signs match."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": true,
+    "multiplierNegative": true,
+    "productNegative": false,
+    "magnitudes": {
+      "multiplicand": "128",
+      "multiplier": "1"
+    }
+  },
+  "summary": "-128 x -1 = 128",
+  "halves": {
+    "a": "00000000",
+    "q": "10000000"
+  }
+}
+`;
+
+exports[`signed multiplication > renders a negative product in two's complement 1`] = `
+{
+  "mode": "signed",
+  "bits": 8,
+  "productBits": 16,
+  "multiplicand": {
+    "decimal": "-5",
+    "binary": "11111011",
+    "grouped": "1111 1011"
+  },
+  "multiplier": {
+    "decimal": "3",
+    "binary": "00000011",
+    "grouped": "0000 0011"
+  },
+  "product": {
+    "decimal": "-15",
+    "binary": "1111111111110001",
+    "grouped": "1111 1111 1111 0001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "00000000",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 3, M holds the multiplicand magnitude 5. The loop runs 8 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000101",
+      "q": "00000011",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000010",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "00000111",
+      "q": "10000001",
+      "m": "00000101",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000011",
+      "q": "11000000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000001",
+      "q": "11100000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "11110000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "01111000",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00111100",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "skip",
+      "action": "No operation",
+      "c": "0",
+      "a": "00000000",
+      "q": "00011110",
+      "m": "00000101",
+      "q0": 0,
+      "note": "Q0 = 0, so this partial product is zero and nothing is added."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": 0,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 0,
+      "kind": "result",
+      "action": "Apply sign",
+      "c": "0",
+      "a": "00000000",
+      "q": "00001111",
+      "m": "00000101",
+      "q0": null,
+      "note": "Product magnitude 15 takes the negative sign, because the operand signs differ."
+    }
+  ],
+  "signs": {
+    "multiplicandNegative": true,
+    "multiplierNegative": false,
+    "productNegative": true,
+    "magnitudes": {
+      "multiplicand": "5",
+      "multiplier": "3"
+    }
+  },
+  "summary": "-5 x 3 = -15",
+  "halves": {
+    "a": "00000000",
+    "q": "00001111"
+  }
+}
+`;
+
+exports[`step-by-step trace > follows the documented register sequence for 5 x 3 in 4 bits 1`] = `
+[
+  "Initialise C=0 A=0000 Q=0011",
+  "C,A <- A + M C=0 A=0101 Q=0011",
+  "Shift right [C,A,Q] C=0 A=0010 Q=1001",
+  "C,A <- A + M C=0 A=0111 Q=1001",
+  "Shift right [C,A,Q] C=0 A=0011 Q=1100",
+  "No operation C=0 A=0011 Q=1100",
+  "Shift right [C,A,Q] C=0 A=0001 Q=1110",
+  "No operation C=0 A=0001 Q=1110",
+  "Shift right [C,A,Q] C=0 A=0000 Q=1111"
+]
+`;
+
+exports[`step-by-step trace > formats a readable table 1`] = `
+"unsigned multiplication, 8-bit operands\\nMultiplicand M: 13 (00001101)\\nMultiplier   Q: 11 (00001011)\\n\\n#   It  Operation            C  A         Q\\n--  --  -------------------  -  --------  --------\\n1   -   Initialise           0  00000000  00001011\\n2   1   C,A <- A + M         0  00001101  00001011\\n3   1   Shift right [C,A,Q]  0  00000110  10000101\\n4   2   C,A <- A + M         0  00010011  10000101\\n5   2   Shift right [C,A,Q]  0  00001001  11000010\\n6   3   No operation         0  00001001  11000010\\n7   3   Shift right [C,A,Q]  0  00000100  11100001\\n8   4   C,A <- A + M         0  00010001  11100001\\n9   4   Shift right [C,A,Q]  0  00001000  11110000\\n10  5   No operation         0  00001000  11110000\\n11  5   Shift right [C,A,Q]  0  00000100  01111000\\n12  6   No operation         0  00000100  01111000\\n13  6   Shift right [C,A,Q]  0  00000010  00111100\\n14  7   No operation         0  00000010  00111100\\n15  7   Shift right [C,A,Q]  0  00000001  00011110\\n16  8   No operation         0  00000001  00011110\\n17  8   Shift right [C,A,Q]  0  00000000  10001111\\n\\nProduct: 143 (0000000010001111)\\nA:Q    : 00000000 10001111"
+`;
+
+exports[`step-by-step trace > records the carry flip-flop when an addition overflows 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 4,
+  "productBits": 8,
+  "multiplicand": {
+    "decimal": "15",
+    "binary": "1111",
+    "grouped": "1111"
+  },
+  "multiplier": {
+    "decimal": "15",
+    "binary": "1111",
+    "grouped": "1111"
+  },
+  "product": {
+    "decimal": "225",
+    "binary": "11100001",
+    "grouped": "1110 0001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "0000",
+      "q": "1111",
+      "m": "1111",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 15, M holds the multiplicand magnitude 15. The loop runs 4 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "1111",
+      "q": "1111",
+      "m": "1111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "0111",
+      "q": "1111",
+      "m": "1111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "0110",
+      "q": "1111",
+      "m": "1111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1011",
+      "q": "0111",
+      "m": "1111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1010",
+      "q": "0111",
+      "m": "1111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1101",
+      "q": "0011",
+      "m": "1111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1100",
+      "q": "0011",
+      "m": "1111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1110",
+      "q": "0001",
+      "m": "1111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "15 x 15 = 225",
+  "halves": {
+    "a": "1110",
+    "q": "0001"
+  }
+}
+`;
+
+exports[`wide data sizes > multiplies 64-bit operands exactly 1`] = `
+{
+  "mode": "unsigned",
+  "bits": 64,
+  "productBits": 128,
+  "multiplicand": {
+    "decimal": "18446744073709551615",
+    "binary": "1111111111111111111111111111111111111111111111111111111111111111",
+    "grouped": "1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111"
+  },
+  "multiplier": {
+    "decimal": "18446744073709551615",
+    "binary": "1111111111111111111111111111111111111111111111111111111111111111",
+    "grouped": "1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111"
+  },
+  "product": {
+    "decimal": "340282366920938463426481119284349108225",
+    "binary": "11111111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000001",
+    "grouped": "1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1111 1110 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0001"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "iteration": 0,
+      "kind": "init",
+      "action": "Initialise",
+      "c": "0",
+      "a": "0000000000000000000000000000000000000000000000000000000000000000",
+      "q": "1111111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": null,
+      "note": "A and C are cleared, Q holds the multiplier magnitude 18446744073709551615, M holds the multiplicand magnitude 18446744073709551615. The loop runs 64 times, once per bit of the multiplier."
+    },
+    {
+      "index": 2,
+      "iteration": 1,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q": "1111111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator."
+    },
+    {
+      "index": 3,
+      "iteration": 1,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "0111111111111111111111111111111111111111111111111111111111111111",
+      "q": "1111111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (1) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 4,
+      "iteration": 2,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "0111111111111111111111111111111111111111111111111111111111111110",
+      "q": "1111111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 5,
+      "iteration": 2,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1011111111111111111111111111111111111111111111111111111111111111",
+      "q": "0111111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 6,
+      "iteration": 3,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1011111111111111111111111111111111111111111111111111111111111110",
+      "q": "0111111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 7,
+      "iteration": 3,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1101111111111111111111111111111111111111111111111111111111111111",
+      "q": "0011111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 8,
+      "iteration": 4,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1101111111111111111111111111111111111111111111111111111111111110",
+      "q": "0011111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 9,
+      "iteration": 4,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1110111111111111111111111111111111111111111111111111111111111111",
+      "q": "0001111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 10,
+      "iteration": 5,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1110111111111111111111111111111111111111111111111111111111111110",
+      "q": "0001111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 11,
+      "iteration": 5,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111011111111111111111111111111111111111111111111111111111111111",
+      "q": "0000111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 12,
+      "iteration": 6,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111011111111111111111111111111111111111111111111111111111111110",
+      "q": "0000111111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 13,
+      "iteration": 6,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111101111111111111111111111111111111111111111111111111111111111",
+      "q": "0000011111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 14,
+      "iteration": 7,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111101111111111111111111111111111111111111111111111111111111110",
+      "q": "0000011111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 15,
+      "iteration": 7,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111110111111111111111111111111111111111111111111111111111111111",
+      "q": "0000001111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 16,
+      "iteration": 8,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111110111111111111111111111111111111111111111111111111111111110",
+      "q": "0000001111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 17,
+      "iteration": 8,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111011111111111111111111111111111111111111111111111111111111",
+      "q": "0000000111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 18,
+      "iteration": 9,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111011111111111111111111111111111111111111111111111111111110",
+      "q": "0000000111111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 19,
+      "iteration": 9,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111101111111111111111111111111111111111111111111111111111111",
+      "q": "0000000011111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 20,
+      "iteration": 10,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111101111111111111111111111111111111111111111111111111111110",
+      "q": "0000000011111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 21,
+      "iteration": 10,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111110111111111111111111111111111111111111111111111111111111",
+      "q": "0000000001111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 22,
+      "iteration": 11,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111110111111111111111111111111111111111111111111111111111110",
+      "q": "0000000001111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 23,
+      "iteration": 11,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111011111111111111111111111111111111111111111111111111111",
+      "q": "0000000000111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 24,
+      "iteration": 12,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111011111111111111111111111111111111111111111111111111110",
+      "q": "0000000000111111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 25,
+      "iteration": 12,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111101111111111111111111111111111111111111111111111111111",
+      "q": "0000000000011111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 26,
+      "iteration": 13,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111101111111111111111111111111111111111111111111111111110",
+      "q": "0000000000011111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 27,
+      "iteration": 13,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111110111111111111111111111111111111111111111111111111111",
+      "q": "0000000000001111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 28,
+      "iteration": 14,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111110111111111111111111111111111111111111111111111111110",
+      "q": "0000000000001111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 29,
+      "iteration": 14,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111011111111111111111111111111111111111111111111111111",
+      "q": "0000000000000111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 30,
+      "iteration": 15,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111011111111111111111111111111111111111111111111111110",
+      "q": "0000000000000111111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 31,
+      "iteration": 15,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111101111111111111111111111111111111111111111111111111",
+      "q": "0000000000000011111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 32,
+      "iteration": 16,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111101111111111111111111111111111111111111111111111110",
+      "q": "0000000000000011111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 33,
+      "iteration": 16,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111110111111111111111111111111111111111111111111111111",
+      "q": "0000000000000001111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 34,
+      "iteration": 17,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111110111111111111111111111111111111111111111111111110",
+      "q": "0000000000000001111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 35,
+      "iteration": 17,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111011111111111111111111111111111111111111111111111",
+      "q": "0000000000000000111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 36,
+      "iteration": 18,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111011111111111111111111111111111111111111111111110",
+      "q": "0000000000000000111111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 37,
+      "iteration": 18,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111101111111111111111111111111111111111111111111111",
+      "q": "0000000000000000011111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 38,
+      "iteration": 19,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111101111111111111111111111111111111111111111111110",
+      "q": "0000000000000000011111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 39,
+      "iteration": 19,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111110111111111111111111111111111111111111111111111",
+      "q": "0000000000000000001111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 40,
+      "iteration": 20,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111110111111111111111111111111111111111111111111110",
+      "q": "0000000000000000001111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 41,
+      "iteration": 20,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111011111111111111111111111111111111111111111111",
+      "q": "0000000000000000000111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 42,
+      "iteration": 21,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111011111111111111111111111111111111111111111110",
+      "q": "0000000000000000000111111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 43,
+      "iteration": 21,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111101111111111111111111111111111111111111111111",
+      "q": "0000000000000000000011111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 44,
+      "iteration": 22,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111101111111111111111111111111111111111111111110",
+      "q": "0000000000000000000011111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 45,
+      "iteration": 22,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111110111111111111111111111111111111111111111111",
+      "q": "0000000000000000000001111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 46,
+      "iteration": 23,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111110111111111111111111111111111111111111111110",
+      "q": "0000000000000000000001111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 47,
+      "iteration": 23,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111011111111111111111111111111111111111111111",
+      "q": "0000000000000000000000111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 48,
+      "iteration": 24,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111011111111111111111111111111111111111111110",
+      "q": "0000000000000000000000111111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 49,
+      "iteration": 24,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111101111111111111111111111111111111111111111",
+      "q": "0000000000000000000000011111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 50,
+      "iteration": 25,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111101111111111111111111111111111111111111110",
+      "q": "0000000000000000000000011111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 51,
+      "iteration": 25,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111110111111111111111111111111111111111111111",
+      "q": "0000000000000000000000001111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 52,
+      "iteration": 26,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111110111111111111111111111111111111111111110",
+      "q": "0000000000000000000000001111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 53,
+      "iteration": 26,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111011111111111111111111111111111111111111",
+      "q": "0000000000000000000000000111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 54,
+      "iteration": 27,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111011111111111111111111111111111111111110",
+      "q": "0000000000000000000000000111111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 55,
+      "iteration": 27,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111101111111111111111111111111111111111111",
+      "q": "0000000000000000000000000011111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 56,
+      "iteration": 28,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111101111111111111111111111111111111111110",
+      "q": "0000000000000000000000000011111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 57,
+      "iteration": 28,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111110111111111111111111111111111111111111",
+      "q": "0000000000000000000000000001111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 58,
+      "iteration": 29,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111110111111111111111111111111111111111110",
+      "q": "0000000000000000000000000001111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 59,
+      "iteration": 29,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111011111111111111111111111111111111111",
+      "q": "0000000000000000000000000000111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 60,
+      "iteration": 30,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111011111111111111111111111111111111110",
+      "q": "0000000000000000000000000000111111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 61,
+      "iteration": 30,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111101111111111111111111111111111111111",
+      "q": "0000000000000000000000000000011111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 62,
+      "iteration": 31,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111101111111111111111111111111111111110",
+      "q": "0000000000000000000000000000011111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 63,
+      "iteration": 31,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111110111111111111111111111111111111111",
+      "q": "0000000000000000000000000000001111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 64,
+      "iteration": 32,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111110111111111111111111111111111111110",
+      "q": "0000000000000000000000000000001111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 65,
+      "iteration": 32,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111011111111111111111111111111111111",
+      "q": "0000000000000000000000000000000111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 66,
+      "iteration": 33,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111011111111111111111111111111111110",
+      "q": "0000000000000000000000000000000111111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 67,
+      "iteration": 33,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111101111111111111111111111111111111",
+      "q": "0000000000000000000000000000000011111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 68,
+      "iteration": 34,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111101111111111111111111111111111110",
+      "q": "0000000000000000000000000000000011111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 69,
+      "iteration": 34,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111110111111111111111111111111111111",
+      "q": "0000000000000000000000000000000001111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 70,
+      "iteration": 35,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111110111111111111111111111111111110",
+      "q": "0000000000000000000000000000000001111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 71,
+      "iteration": 35,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111011111111111111111111111111111",
+      "q": "0000000000000000000000000000000000111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 72,
+      "iteration": 36,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111011111111111111111111111111110",
+      "q": "0000000000000000000000000000000000111111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 73,
+      "iteration": 36,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111101111111111111111111111111111",
+      "q": "0000000000000000000000000000000000011111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 74,
+      "iteration": 37,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111101111111111111111111111111110",
+      "q": "0000000000000000000000000000000000011111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 75,
+      "iteration": 37,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111110111111111111111111111111111",
+      "q": "0000000000000000000000000000000000001111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 76,
+      "iteration": 38,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111110111111111111111111111111110",
+      "q": "0000000000000000000000000000000000001111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 77,
+      "iteration": 38,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111011111111111111111111111111",
+      "q": "0000000000000000000000000000000000000111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 78,
+      "iteration": 39,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111011111111111111111111111110",
+      "q": "0000000000000000000000000000000000000111111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 79,
+      "iteration": 39,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111101111111111111111111111111",
+      "q": "0000000000000000000000000000000000000011111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 80,
+      "iteration": 40,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111101111111111111111111111110",
+      "q": "0000000000000000000000000000000000000011111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 81,
+      "iteration": 40,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111110111111111111111111111111",
+      "q": "0000000000000000000000000000000000000001111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 82,
+      "iteration": 41,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111110111111111111111111111110",
+      "q": "0000000000000000000000000000000000000001111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 83,
+      "iteration": 41,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111011111111111111111111111",
+      "q": "0000000000000000000000000000000000000000111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 84,
+      "iteration": 42,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111011111111111111111111110",
+      "q": "0000000000000000000000000000000000000000111111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 85,
+      "iteration": 42,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111101111111111111111111111",
+      "q": "0000000000000000000000000000000000000000011111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 86,
+      "iteration": 43,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111101111111111111111111110",
+      "q": "0000000000000000000000000000000000000000011111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 87,
+      "iteration": 43,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111110111111111111111111111",
+      "q": "0000000000000000000000000000000000000000001111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 88,
+      "iteration": 44,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111110111111111111111111110",
+      "q": "0000000000000000000000000000000000000000001111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 89,
+      "iteration": 44,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111011111111111111111111",
+      "q": "0000000000000000000000000000000000000000000111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 90,
+      "iteration": 45,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111011111111111111111110",
+      "q": "0000000000000000000000000000000000000000000111111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 91,
+      "iteration": 45,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111101111111111111111111",
+      "q": "0000000000000000000000000000000000000000000011111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 92,
+      "iteration": 46,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111101111111111111111110",
+      "q": "0000000000000000000000000000000000000000000011111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 93,
+      "iteration": 46,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111110111111111111111111",
+      "q": "0000000000000000000000000000000000000000000001111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 94,
+      "iteration": 47,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111110111111111111111110",
+      "q": "0000000000000000000000000000000000000000000001111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 95,
+      "iteration": 47,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111011111111111111111",
+      "q": "0000000000000000000000000000000000000000000000111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 96,
+      "iteration": 48,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111011111111111111110",
+      "q": "0000000000000000000000000000000000000000000000111111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 97,
+      "iteration": 48,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111101111111111111111",
+      "q": "0000000000000000000000000000000000000000000000011111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 98,
+      "iteration": 49,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111101111111111111110",
+      "q": "0000000000000000000000000000000000000000000000011111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 99,
+      "iteration": 49,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111110111111111111111",
+      "q": "0000000000000000000000000000000000000000000000001111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 100,
+      "iteration": 50,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111110111111111111110",
+      "q": "0000000000000000000000000000000000000000000000001111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 101,
+      "iteration": 50,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111011111111111111",
+      "q": "0000000000000000000000000000000000000000000000000111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 102,
+      "iteration": 51,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111011111111111110",
+      "q": "0000000000000000000000000000000000000000000000000111111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 103,
+      "iteration": 51,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111101111111111111",
+      "q": "0000000000000000000000000000000000000000000000000011111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 104,
+      "iteration": 52,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111101111111111110",
+      "q": "0000000000000000000000000000000000000000000000000011111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 105,
+      "iteration": 52,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111110111111111111",
+      "q": "0000000000000000000000000000000000000000000000000001111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 106,
+      "iteration": 53,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111110111111111110",
+      "q": "0000000000000000000000000000000000000000000000000001111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 107,
+      "iteration": 53,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111011111111111",
+      "q": "0000000000000000000000000000000000000000000000000000111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 108,
+      "iteration": 54,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111011111111110",
+      "q": "0000000000000000000000000000000000000000000000000000111111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 109,
+      "iteration": 54,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111101111111111",
+      "q": "0000000000000000000000000000000000000000000000000000011111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 110,
+      "iteration": 55,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111101111111110",
+      "q": "0000000000000000000000000000000000000000000000000000011111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 111,
+      "iteration": 55,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111110111111111",
+      "q": "0000000000000000000000000000000000000000000000000000001111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 112,
+      "iteration": 56,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111110111111110",
+      "q": "0000000000000000000000000000000000000000000000000000001111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 113,
+      "iteration": 56,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111011111111",
+      "q": "0000000000000000000000000000000000000000000000000000000111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 114,
+      "iteration": 57,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111011111110",
+      "q": "0000000000000000000000000000000000000000000000000000000111111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 115,
+      "iteration": 57,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111101111111",
+      "q": "0000000000000000000000000000000000000000000000000000000011111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 116,
+      "iteration": 58,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111101111110",
+      "q": "0000000000000000000000000000000000000000000000000000000011111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 117,
+      "iteration": 58,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111110111111",
+      "q": "0000000000000000000000000000000000000000000000000000000001111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 118,
+      "iteration": 59,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111110111110",
+      "q": "0000000000000000000000000000000000000000000000000000000001111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 119,
+      "iteration": 59,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111111011111",
+      "q": "0000000000000000000000000000000000000000000000000000000000111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 120,
+      "iteration": 60,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111111011110",
+      "q": "0000000000000000000000000000000000000000000000000000000000111111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 121,
+      "iteration": 60,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111111101111",
+      "q": "0000000000000000000000000000000000000000000000000000000000011111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 122,
+      "iteration": 61,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111111101110",
+      "q": "0000000000000000000000000000000000000000000000000000000000011111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 123,
+      "iteration": 61,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111111110111",
+      "q": "0000000000000000000000000000000000000000000000000000000000001111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 124,
+      "iteration": 62,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111111110110",
+      "q": "0000000000000000000000000000000000000000000000000000000000001111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 125,
+      "iteration": 62,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111111111011",
+      "q": "0000000000000000000000000000000000000000000000000000000000000111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 126,
+      "iteration": 63,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111111111010",
+      "q": "0000000000000000000000000000000000000000000000000000000000000111",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 127,
+      "iteration": 63,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111111111101",
+      "q": "0000000000000000000000000000000000000000000000000000000000000011",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    },
+    {
+      "index": 128,
+      "iteration": 64,
+      "kind": "add",
+      "action": "C,A <- A + M",
+      "c": "1",
+      "a": "1111111111111111111111111111111111111111111111111111111111111100",
+      "q": "0000000000000000000000000000000000000000000000000000000000000011",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "Q0 = 1, so the multiplicand is added into the accumulator. The addition overflowed n bits, so the carry is held in C."
+    },
+    {
+      "index": 129,
+      "iteration": 64,
+      "kind": "shift",
+      "action": "Shift right [C,A,Q]",
+      "c": "0",
+      "a": "1111111111111111111111111111111111111111111111111111111111111110",
+      "q": "0000000000000000000000000000000000000000000000000000000000000001",
+      "m": "1111111111111111111111111111111111111111111111111111111111111111",
+      "q0": 1,
+      "note": "C moves into A's MSB, A's LSB (0) moves into Q's MSB, and the used multiplier bit drops off. C is cleared."
+    }
+  ],
+  "signs": null,
+  "summary": "18446744073709551615 x 18446744073709551615 = 340282366920938463426481119284349108225",
+  "halves": {
+    "a": "1111111111111111111111111111111111111111111111111111111111111110",
+    "q": "0000000000000000000000000000000000000000000000000000000000000001"
+  }
+}
+`;

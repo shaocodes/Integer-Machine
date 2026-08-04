@@ -1,0 +1,343 @@
+exports[`bit helpers > groups and hex-formats 1`] = `
+"1100 1000"
+`;
+
+exports[`bit helpers > groups and hex-formats 2`] = `
+"10 1010"
+`;
+
+exports[`bit helpers > groups and hex-formats 3`] = `
+"C8"
+`;
+
+exports[`bit helpers > groups and hex-formats 4`] = `
+"F"
+`;
+
+exports[`bit helpers > reads two's complement back 1`] = `
+"-3n"
+`;
+
+exports[`bit helpers > reads two's complement back 2`] = `
+"5n"
+`;
+
+exports[`bit helpers > wraps values into a fixed width 1`] = `
+"111111"
+`;
+
+exports[`bit helpers > wraps values into a fixed width 2`] = `
+"111101"
+`;
+
+exports[`bit helpers > wraps values into a fixed width 3`] = `
+"000101"
+`;
+
+exports[`convertBinary > reads one pattern under both interpretations 1`] = `
+{
+  "input": "11111101",
+  "bits": 8,
+  "binary": "11111101",
+  "grouped": "1111 1101",
+  "hex": "FD",
+  "unsignedValue": "253n",
+  "signedValue": "-3n"
+}
+`;
+
+exports[`convertDecimal > reports both as out of bounds when the value is far too large 1`] = `
+{
+  "input": "1000",
+  "value": "1000n",
+  "bits": 8,
+  "unsigned": {
+    "ok": false,
+    "code": "OUT_OF_RANGE",
+    "message": "1000 does not fit in 8 unsigned bits (range 0 to 255)."
+  },
+  "signed": {
+    "ok": false,
+    "code": "OUT_OF_RANGE",
+    "message": "1000 does not fit in 8 signed bits (range -128 to 127)."
+  },
+  "signedSteps": null,
+  "ranges": {
+    "unsigned": {
+      "min": "0n",
+      "max": "255n"
+    },
+    "signed": {
+      "min": "-128n",
+      "max": "127n"
+    }
+  }
+}
+`;
+
+exports[`convertDecimal > reports both representations for a positive value 1`] = `
+{
+  "input": "100",
+  "value": "100n",
+  "bits": 8,
+  "unsigned": {
+    "ok": true,
+    "binary": "01100100",
+    "grouped": "0110 0100",
+    "hex": "64"
+  },
+  "signed": {
+    "ok": true,
+    "binary": "01100100",
+    "grouped": "0110 0100",
+    "hex": "64"
+  },
+  "signedSteps": null,
+  "ranges": {
+    "unsigned": {
+      "min": "0n",
+      "max": "255n"
+    },
+    "signed": {
+      "min": "-128n",
+      "max": "127n"
+    }
+  }
+}
+`;
+
+exports[`convertDecimal > reports signed as out of bounds when only unsigned fits 1`] = `
+{
+  "input": "200",
+  "value": "200n",
+  "bits": 8,
+  "unsigned": {
+    "ok": true,
+    "binary": "11001000",
+    "grouped": "1100 1000",
+    "hex": "C8"
+  },
+  "signed": {
+    "ok": false,
+    "code": "OUT_OF_RANGE",
+    "message": "200 does not fit in 8 signed bits (range -128 to 127)."
+  },
+  "signedSteps": null,
+  "ranges": {
+    "unsigned": {
+      "min": "0n",
+      "max": "255n"
+    },
+    "signed": {
+      "min": "-128n",
+      "max": "127n"
+    }
+  }
+}
+`;
+
+exports[`convertDecimal > reports unsigned as out of bounds for a negative value 1`] = `
+{
+  "input": "-100",
+  "value": "-100n",
+  "bits": 8,
+  "unsigned": {
+    "ok": false,
+    "code": "OUT_OF_RANGE",
+    "message": "-100 is negative and cannot be stored as an unsigned value. Unsigned 8-bit range is 0 to 255."
+  },
+  "signed": {
+    "ok": true,
+    "binary": "10011100",
+    "grouped": "1001 1100",
+    "hex": "9C"
+  },
+  "signedSteps": {
+    "magnitude": "01100100",
+    "inverted": "10011011",
+    "result": "10011100"
+  },
+  "ranges": {
+    "unsigned": {
+      "min": "0n",
+      "max": "255n"
+    },
+    "signed": {
+      "min": "-128n",
+      "max": "127n"
+    }
+  }
+}
+`;
+
+exports[`data size validation > accepts the documented range 1`] = `
+"3n"
+`;
+
+exports[`data size validation > accepts the documented range 2`] = `
+"255n"
+`;
+
+exports[`data size validation > accepts the documented range 3`] = `
+"18446744073709551615n"
+`;
+
+exports[`data size validation > accepts the documented range 4`] = `
+"-9223372036854775808n"
+`;
+
+exports[`data size validation > accepts the documented range 5`] = `
+"9223372036854775807n"
+`;
+
+exports[`data size validation > accepts the documented range 6`] = `
+"340282366920938463463374607431768211455n"
+`;
+
+exports[`data size validation > accepts the documented range 7`] = `
+"89884656743115795386465259539451236680898848947115328636715040578866337902750481566354238661203768010560056939935696678829394884407208311246423715319737062188883946712432742638151109800623047059726541476042502884419075341171231440736956555270413618581675255342293149119973622969239858152417678164812112068607n"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 1`] = `
+"00000000"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 2`] = `
+"00000101"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 3`] = `
+"11111011"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 4`] = `
+"11111111"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 5`] = `
+"01111111"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 6`] = `
+"10000000"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 7`] = `
+"01"
+`;
+
+exports[`decimal to signed binary (two's complement) > converts positive, zero and negative values 8`] = `
+"10"
+`;
+
+exports[`decimal to signed binary (two's complement) > handles the asymmetric edges of wide words 1`] = `
+"1000000000000000000000000000000000000000000000000000000000000000"
+`;
+
+exports[`decimal to signed binary (two's complement) > handles the asymmetric edges of wide words 2`] = `
+"0111111111111111111111111111111111111111111111111111111111111111"
+`;
+
+exports[`decimal to unsigned binary > converts in-range values 1`] = `
+"00"
+`;
+
+exports[`decimal to unsigned binary > converts in-range values 2`] = `
+"11"
+`;
+
+exports[`decimal to unsigned binary > converts in-range values 3`] = `
+"0101"
+`;
+
+exports[`decimal to unsigned binary > converts in-range values 4`] = `
+"11001000"
+`;
+
+exports[`decimal to unsigned binary > converts in-range values 5`] = `
+"11111111"
+`;
+
+exports[`decimal to unsigned binary > converts in-range values 6`] = `
+"1111111111111111111111111111111111111111111111111111111111111111"
+`;
+
+exports[`decimal to unsigned binary > converts in-range values 7`] = `
+"1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+`;
+
+exports[`parseBinary > normalises to the data size 1`] = `
+"00000101"
+`;
+
+exports[`parseBinary > normalises to the data size 2`] = `
+"00001010"
+`;
+
+exports[`parseBinary > normalises to the data size 3`] = `
+"10101100"
+`;
+
+exports[`parseBinary > normalises to the data size 4`] = `
+"11111111"
+`;
+
+exports[`parseDecimal > reads signed integers and tolerates separators 1`] = `
+"42n"
+`;
+
+exports[`parseDecimal > reads signed integers and tolerates separators 2`] = `
+"-7n"
+`;
+
+exports[`parseDecimal > reads signed integers and tolerates separators 3`] = `
+"9n"
+`;
+
+exports[`parseDecimal > reads signed integers and tolerates separators 4`] = `
+"-1048576n"
+`;
+
+exports[`parseDecimal > reads signed integers and tolerates separators 5`] = `
+"1000n"
+`;
+
+exports[`parseDecimal > reads signed integers and tolerates separators 6`] = `
+"9007199254740993n"
+`;
+
+exports[`readOperand > accepts decimal and binary in either signedness 1`] = `
+"-9n"
+`;
+
+exports[`readOperand > accepts decimal and binary in either signedness 2`] = `
+"-9n"
+`;
+
+exports[`readOperand > accepts decimal and binary in either signedness 3`] = `
+"247n"
+`;
+
+exports[`twosComplementSteps > is null for non-negative values 1`] = `
+null
+`;
+
+exports[`twosComplementSteps > is null for non-negative values 2`] = `
+null
+`;
+
+exports[`twosComplementSteps > shows magnitude, inversion and increment 1`] = `
+{
+  "magnitude": "00000101",
+  "inverted": "11111010",
+  "result": "11111011"
+}
+`;
+
+exports[`twosComplementSteps > shows magnitude, inversion and increment 2`] = `
+{
+  "magnitude": "10000000",
+  "inverted": "01111111",
+  "result": "10000000"
+}
+`;

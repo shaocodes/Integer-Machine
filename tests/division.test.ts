@@ -24,6 +24,11 @@ import {
 } from '../src/lib/division.ts'
 import { MachineError } from '../src/lib/errors.ts'
 
+/** Allows Node.js test runner to serialize BigInts in snapshots */
+;(BigInt.prototype as any).toJSON = function () {
+  return this.toString() + 'n'
+}
+
 /** Asserts that `fn` throws a MachineError carrying the expected code. */
 function throwsCode(fn: () => unknown, code: string): void {
   assert.throws(fn, (error: unknown) => {
@@ -91,57 +96,46 @@ function run(dividend: bigint, divisor: bigint, bits: number, mode: DivisionMode
 }
 
 describe('unsigned non-restoring division — normal cases', () => {
-  it('divides the textbook example 7 / 2 in 4 bits', () => {
+  it('divides the textbook example 7 / 2 in 4 bits', (t) => {
     const result = run(7n, 2n, 4, 'unsigned')
-    assert.equal(result.quotient.decimal, '3')
-    assert.equal(result.quotient.binary, '0011')
-    assert.equal(result.remainder.decimal, '1')
-    assert.equal(result.remainder.binary, '0001')
+    t.assert.snapshot(result)
   })
 
-  it('divides 200 / 7 in 8 bits', () => {
+  it('divides 200 / 7 in 8 bits', (t) => {
     const result = run(200n, 7n, 8, 'unsigned')
-    assert.equal(result.quotient.decimal, '28')
-    assert.equal(result.remainder.decimal, '4')
-    assert.equal(result.summary, '200 / 7 = 28 remainder 4')
+    t.assert.snapshot(result)
   })
 
-  it('divides exactly, leaving no remainder', () => {
+  it('divides exactly, leaving no remainder', (t) => {
     const result = run(144n, 12n, 8, 'unsigned')
-    assert.equal(result.quotient.decimal, '12')
-    assert.equal(result.remainder.decimal, '0')
+    t.assert.snapshot(result)
   })
 })
 
 describe('unsigned non-restoring division — special and edge cases', () => {
-  it('handles a zero dividend', () => {
+  it('handles a zero dividend', (t) => {
     const result = run(0n, 5n, 8, 'unsigned')
-    assert.equal(result.quotient.decimal, '0')
-    assert.equal(result.remainder.decimal, '0')
+    t.assert.snapshot(result)
   })
 
-  it('handles a divisor larger than the dividend', () => {
+  it('handles a divisor larger than the dividend', (t) => {
     const result = run(3n, 200n, 8, 'unsigned')
-    assert.equal(result.quotient.decimal, '0')
-    assert.equal(result.remainder.decimal, '3')
+    t.assert.snapshot(result)
   })
 
-  it('handles division by one', () => {
+  it('handles division by one', (t) => {
     const result = run(255n, 1n, 8, 'unsigned')
-    assert.equal(result.quotient.decimal, '255')
-    assert.equal(result.remainder.decimal, '0')
+    t.assert.snapshot(result)
   })
 
-  it('handles equal operands', () => {
+  it('handles equal operands', (t) => {
     const result = run(97n, 97n, 8, 'unsigned')
-    assert.equal(result.quotient.decimal, '1')
-    assert.equal(result.remainder.decimal, '0')
+    t.assert.snapshot(result)
   })
 
-  it('handles the widest operands at the smallest data size', () => {
+  it('handles the widest operands at the smallest data size', (t) => {
     const result = run(3n, 1n, 2, 'unsigned')
-    assert.equal(result.quotient.decimal, '3')
-    assert.equal(result.remainder.decimal, '0')
+    t.assert.snapshot(result)
   })
 
   it('handles the all-ones dividend and divisor, where A needs its guard bit', () => {
@@ -161,26 +155,21 @@ describe('unsigned non-restoring division — special and edge cases', () => {
 })
 
 describe('signed non-restoring division', () => {
-  it('covers all four sign combinations', () => {
-    assert.equal(run(17n, 5n, 8, 'signed').summary, '17 / 5 = 3 remainder 2')
-    assert.equal(run(-17n, 5n, 8, 'signed').summary, '-17 / 5 = -3 remainder -2')
-    assert.equal(run(17n, -5n, 8, 'signed').summary, '17 / -5 = -3 remainder 2')
-    assert.equal(run(-17n, -5n, 8, 'signed').summary, '-17 / -5 = 3 remainder -2')
+  it('covers all four sign combinations', (t) => {
+    t.assert.snapshot(run(17n, 5n, 8, 'signed'))
+    t.assert.snapshot(run(-17n, 5n, 8, 'signed'))
+    t.assert.snapshot(run(17n, -5n, 8, 'signed'))
+    t.assert.snapshot(run(-17n, -5n, 8, 'signed'))
   })
 
-  it('renders negative results in two\'s complement', () => {
+  it('renders negative results in two\'s complement', (t) => {
     const result = run(-17n, 5n, 8, 'signed')
-    assert.equal(result.quotient.binary, toSignedBinary(-3n, 8))
-    assert.equal(result.remainder.binary, toSignedBinary(-2n, 8))
-    assert.ok(result.signs !== null)
-    assert.equal(result.signs.quotientNegative, true)
-    assert.deepEqual(result.signs.magnitudes, { dividend: '17', divisor: '5' })
+    t.assert.snapshot(result)
   })
 
-  it('divides the most negative value by one', () => {
+  it('divides the most negative value by one', (t) => {
     const result = run(signedMin(8), 1n, 8, 'signed')
-    assert.equal(result.quotient.decimal, '-128')
-    assert.equal(result.remainder.decimal, '0')
+    t.assert.snapshot(result)
   })
 
   it('reports overflow for the most negative value divided by -1', () => {
@@ -195,11 +184,10 @@ describe('signed non-restoring division', () => {
 })
 
 describe('wide data sizes', () => {
-  it('divides 64-bit operands exactly', () => {
+  it('divides 64-bit operands exactly', (t) => {
     const dividend = unsignedMax(64)
     const result = run(dividend, 1_000_000_007n, 64, 'unsigned')
-    assert.equal(result.steps.filter((step) => step.kind === 'shift').length, 64)
-    assert.equal(BigInt(result.quotient.decimal), dividend / 1_000_000_007n)
+    t.assert.snapshot(result)
   })
 
   it('divides beyond 64 bits', () => {
@@ -210,7 +198,7 @@ describe('wide data sizes', () => {
 })
 
 describe('operand input handling', () => {
-  it('accepts decimal and binary operands interchangeably', () => {
+  it('accepts decimal and binary operands interchangeably', (t) => {
     const fromDecimal = divide({
       dividend: { format: 'decimal', text: '200' },
       divisor: { format: 'decimal', text: '7' },
@@ -229,20 +217,19 @@ describe('operand input handling', () => {
       bits: 8,
       mode: 'unsigned',
     })
-    assert.equal(fromDecimal.summary, '200 / 7 = 28 remainder 4')
-    assert.equal(fromBinary.summary, fromDecimal.summary)
-    assert.equal(mixed.summary, fromDecimal.summary)
-    assert.deepEqual(fromBinary.steps, fromDecimal.steps)
+    t.assert.snapshot(fromDecimal)
+    t.assert.snapshot(fromBinary)
+    t.assert.snapshot(mixed)
   })
 
-  it('reads a binary operand as negative in signed mode', () => {
+  it('reads a binary operand as negative in signed mode', (t) => {
     const result = divide({
       dividend: { format: 'binary', text: '11101111' }, // -17
       divisor: { format: 'decimal', text: '5' },
       bits: 8,
       mode: 'signed',
     })
-    assert.equal(result.summary, '-17 / 5 = -3 remainder -2')
+    t.assert.snapshot(result)
   })
 
   it('surfaces malformed operands', () => {
@@ -270,41 +257,28 @@ describe('operand input handling', () => {
 })
 
 describe('step-by-step trace', () => {
-  it('follows the documented register sequence for 7 / 2 in 4 bits', () => {
+  it('follows the documented register sequence for 7 / 2 in 4 bits', (t) => {
     const result = divideValues(7n, 2n, 4, 'unsigned')
     // A is shown in 6 bits (4 data bits + guard + sign).
     const trace = result.steps.map((step) => `${step.action} A=${step.a} Q=${step.q}`)
-    assert.deepEqual(trace, [
-      'Initialise A=000000 Q=0111',
-      'Shift left [A,Q] A=000000 Q=1110',
-      'A <- A - M A=111110 Q=1110',
-      'Shift left [A,Q] A=111101 Q=1100',
-      'A <- A + M A=111111 Q=1100',
-      'Shift left [A,Q] A=111111 Q=1000',
-      'A <- A + M A=000001 Q=1001',
-      'Shift left [A,Q] A=000011 Q=0010',
-      'A <- A - M A=000001 Q=0011',
-    ])
-    assert.equal(quotientBitsFromSteps(result), '0011')
+    t.assert.snapshot(trace)
+    t.assert.snapshot(quotientBitsFromSteps(result))
   })
 
-  it('records the final restore only when the loop ends negative', () => {
+  it('records the final restore only when the loop ends negative', (t) => {
     // 1 / 3: every subtraction overshoots, so A ends negative and is restored.
     const restored = run(1n, 3n, 4, 'unsigned')
-    assert.equal(restored.steps.filter((step) => step.kind === 'restore').length, 1)
-    assert.equal(restored.remainder.decimal, '1')
+    t.assert.snapshot(restored)
 
     // 7 / 2 ends with A = +1, so no correction is needed. (An exact division is
     // *not* a guarantee: 8 / 4 also ends negative and does need the restore.)
     const noRestore = run(7n, 2n, 4, 'unsigned')
-    assert.equal(noRestore.steps.filter((step) => step.kind === 'restore').length, 0)
+    t.assert.snapshot(noRestore)
   })
 
-  it('formats a readable table', () => {
+  it('formats a readable table', (t) => {
     const text = formatDivision(divideValues(200n, 7n, 8, 'unsigned'))
-    assert.match(text, /unsigned division, 8-bit operands/)
-    assert.match(text, /Quotient : 28 \(00011100\)/)
-    assert.match(text, /Check    : \(28 x 7\) \+ 4 = 200 = 200/)
+    t.assert.snapshot(text)
   })
 })
 

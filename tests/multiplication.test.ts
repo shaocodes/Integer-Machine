@@ -19,6 +19,11 @@ import {
   type MultiplicationResult,
 } from '../src/lib/multiplication.ts'
 
+/** Allows Node.js test runner to serialize BigInts in snapshots */
+;(BigInt.prototype as any).toJSON = function () {
+  return this.toString() + 'n'
+}
+
 /** Asserts that `fn` throws a MachineError carrying the expected code. */
 function throwsCode(fn: () => unknown, code: string): void {
   assert.throws(fn, (error: unknown) => {
@@ -86,46 +91,40 @@ describe('sequential multiplier — normal cases', () => {
     assert.deepEqual(result.halves, { a: '0000', q: '1111' })
   })
 
-  it('multiplies 13 x 11 in 8 bits', () => {
+  it('multiplies 13 x 11 in 8 bits', (t) => {
     const result = run(13n, 11n, 8, 'unsigned')
-    assert.equal(result.product.decimal, '143')
-    assert.equal(result.summary, '13 x 11 = 143')
+    t.assert.snapshot(result)
   })
 
-  it('multiplies the largest 8-bit operands', () => {
+  it('multiplies the largest 8-bit operands', (t) => {
     const result = run(255n, 255n, 8, 'unsigned')
-    assert.equal(result.product.decimal, '65025')
-    assert.equal(result.product.binary, '1111111000000001') // 0xFE01
+    t.assert.snapshot(result)
   })
 })
 
 describe('sequential multiplier — special and edge cases', () => {
-  it('handles a zero operand', () => {
-    assert.equal(run(0n, 200n, 8, 'unsigned').product.decimal, '0')
-    assert.equal(run(200n, 0n, 8, 'unsigned').product.decimal, '0')
+  it('handles a zero operand', (t) => {
+    t.assert.snapshot(run(0n, 200n, 8, 'unsigned'))
+    t.assert.snapshot(run(200n, 0n, 8, 'unsigned'))
   })
 
-  it('handles multiplication by one', () => {
-    assert.equal(run(1n, 173n, 8, 'unsigned').product.decimal, '173')
-    assert.equal(run(173n, 1n, 8, 'unsigned').product.decimal, '173')
+  it('handles multiplication by one', (t) => {
+    t.assert.snapshot(run(1n, 173n, 8, 'unsigned'))
+    t.assert.snapshot(run(173n, 1n, 8, 'unsigned'))
   })
 
-  it('handles powers of two, where every iteration but one is a skip', () => {
+  it('handles powers of two, where every iteration but one is a skip', (t) => {
     const result = run(1n, 128n, 8, 'unsigned')
-    assert.equal(result.product.decimal, '128')
-    assert.equal(result.steps.filter((step) => step.kind === 'add').length, 1)
-    assert.equal(result.steps.filter((step) => step.kind === 'skip').length, 7)
+    t.assert.snapshot(result)
   })
 
-  it('handles the all-ones multiplier, where every iteration adds', () => {
+  it('handles the all-ones multiplier, where every iteration adds', (t) => {
     const result = run(200n, 255n, 8, 'unsigned')
-    assert.equal(result.steps.filter((step) => step.kind === 'add').length, 8)
-    assert.equal(result.product.decimal, '51000')
+    t.assert.snapshot(result)
   })
 
-  it('handles the smallest data size', () => {
-    assert.equal(run(3n, 3n, 2, 'unsigned').product.decimal, '9')
-    assert.equal(run(3n, 3n, 2, 'unsigned').product.binary, '1001')
+  it('handles the smallest data size', (t) => {
+    t.assert.snapshot(run(3n, 3n, 2, 'unsigned'))
   })
 
   it('rejects operands that do not fit the data size', () => {
@@ -135,27 +134,22 @@ describe('sequential multiplier — special and edge cases', () => {
 })
 
 describe('signed multiplication', () => {
-  it('covers all four sign combinations', () => {
-    assert.equal(run(5n, 3n, 8, 'signed').summary, '5 x 3 = 15')
-    assert.equal(run(-5n, 3n, 8, 'signed').summary, '-5 x 3 = -15')
-    assert.equal(run(5n, -3n, 8, 'signed').summary, '5 x -3 = -15')
-    assert.equal(run(-5n, -3n, 8, 'signed').summary, '-5 x -3 = 15')
+  it('covers all four sign combinations', (t) => {
+    t.assert.snapshot(run(5n, 3n, 8, 'signed'))
+    t.assert.snapshot(run(-5n, 3n, 8, 'signed'))
+    t.assert.snapshot(run(5n, -3n, 8, 'signed'))
+    t.assert.snapshot(run(-5n, -3n, 8, 'signed'))
   })
 
-  it('renders a negative product in two\'s complement', () => {
+  it('renders a negative product in two\'s complement', (t) => {
     const result = run(-5n, 3n, 8, 'signed')
-    // -15 in 16 bits (the product field is 2n bits wide).
-    assert.equal(result.product.binary, '1111111111110001')
-    assert.ok(result.signs !== null)
-    assert.equal(result.signs.productNegative, true)
-    assert.deepEqual(result.signs.magnitudes, { multiplicand: '5', multiplier: '3' })
+    t.assert.snapshot(result)
   })
 
-  it('handles the most negative operands, the widest signed product', () => {
-    const result = run(signedMin(8), signedMin(8), 8, 'signed')
-    assert.equal(result.product.decimal, '16384') // (-128)^2 fits 16 signed bits
-    assert.equal(run(signedMin(8), 1n, 8, 'signed').product.decimal, '-128')
-    assert.equal(run(signedMin(8), -1n, 8, 'signed').product.decimal, '128')
+  it('handles the most negative operands, the widest signed product', (t) => {
+    t.assert.snapshot(run(signedMin(8), signedMin(8), 8, 'signed'))
+    t.assert.snapshot(run(signedMin(8), 1n, 8, 'signed'))
+    t.assert.snapshot(run(signedMin(8), -1n, 8, 'signed'))
   })
 
   it('rejects operands outside the signed range', () => {
@@ -165,10 +159,9 @@ describe('signed multiplication', () => {
 })
 
 describe('wide data sizes', () => {
-  it('multiplies 64-bit operands exactly', () => {
+  it('multiplies 64-bit operands exactly', (t) => {
     const result = run(unsignedMax(64), unsignedMax(64), 64, 'unsigned')
-    assert.equal(BigInt(result.product.decimal), unsignedMax(64) * unsignedMax(64))
-    assert.equal(result.productBits, 128)
+    t.assert.snapshot(result)
   })
 
   it('multiplies beyond 64 bits', () => {
@@ -178,7 +171,7 @@ describe('wide data sizes', () => {
 })
 
 describe('operand input handling', () => {
-  it('accepts decimal and binary operands interchangeably', () => {
+  it('accepts decimal and binary operands interchangeably', (t) => {
     const fromDecimal = multiply({
       multiplicand: { format: 'decimal', text: '13' },
       multiplier: { format: 'decimal', text: '11' },
@@ -191,18 +184,18 @@ describe('operand input handling', () => {
       bits: 8,
       mode: 'unsigned',
     })
-    assert.equal(fromDecimal.summary, '13 x 11 = 143')
-    assert.deepEqual(fromBinary.steps, fromDecimal.steps)
+    t.assert.snapshot(fromDecimal)
+    t.assert.snapshot(fromBinary)
   })
 
-  it('reads a binary operand as negative in signed mode', () => {
+  it('reads a binary operand as negative in signed mode', (t) => {
     const result = multiply({
       multiplicand: { format: 'binary', text: '11111011' }, // -5
       multiplier: { format: 'decimal', text: '3' },
       bits: 8,
       mode: 'signed',
     })
-    assert.equal(result.summary, '-5 x 3 = -15')
+    t.assert.snapshot(result)
   })
 
   it('surfaces malformed operands', () => {
@@ -220,36 +213,21 @@ describe('operand input handling', () => {
 })
 
 describe('step-by-step trace', () => {
-  it('follows the documented register sequence for 5 x 3 in 4 bits', () => {
+  it('follows the documented register sequence for 5 x 3 in 4 bits', (t) => {
     const result = multiplyValues(5n, 3n, 4, 'unsigned')
     const trace = result.steps.map((step) => `${step.action} C=${step.c} A=${step.a} Q=${step.q}`)
-    assert.deepEqual(trace, [
-      'Initialise C=0 A=0000 Q=0011',
-      'C,A <- A + M C=0 A=0101 Q=0011',
-      'Shift right [C,A,Q] C=0 A=0010 Q=1001',
-      'C,A <- A + M C=0 A=0111 Q=1001',
-      'Shift right [C,A,Q] C=0 A=0011 Q=1100',
-      'No operation C=0 A=0011 Q=1100',
-      'Shift right [C,A,Q] C=0 A=0001 Q=1110',
-      'No operation C=0 A=0001 Q=1110',
-      'Shift right [C,A,Q] C=0 A=0000 Q=1111',
-    ])
+    t.assert.snapshot(trace)
   })
 
-  it('records the carry flip-flop when an addition overflows', () => {
+  it('records the carry flip-flop when an addition overflows', (t) => {
     // 15 x 15 in 4 bits: A + M overflows 4 bits, so C must catch the carry.
     const result = run(15n, 15n, 4, 'unsigned')
-    assert.equal(result.product.decimal, '225')
-    assert.ok(
-      result.steps.some((step) => step.kind === 'add' && step.c === '1'),
-      'expected at least one addition to set the carry',
-    )
+    t.assert.snapshot(result)
   })
 
-  it('formats a readable table', () => {
+  it('formats a readable table', (t) => {
     const text = formatMultiplication(multiplyValues(13n, 11n, 8, 'unsigned'))
-    assert.match(text, /unsigned multiplication, 8-bit operands/)
-    assert.match(text, /Product: 143 \(0000000010001111\)/)
+    t.assert.snapshot(text)
   })
 })
 
