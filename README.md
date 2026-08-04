@@ -126,7 +126,7 @@ The program must include **error checking for out-of-bounds values**.
 
 # Project Documentation
 
-**Live site:** _to be added_ · **Video walkthrough:** _to be added_
+**Live site:** ![Test Cases Screenshot](./tests-screenshot.png) · **Video walkthrough:** (https://youtu.be/3uOtCqKVlUA)
 
 ## Running it
 
