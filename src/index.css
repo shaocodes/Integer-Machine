@@ -3,23 +3,10 @@
 :root {
   /* --- Color Tokens --- */
   --color-primary: #0A84FF;
-  --color-primary-hover: #0071E3;
-  --color-primary-active: #0057B8;
   --color-primary-subtle: rgba(10, 132, 255, 0.11);
-  --color-primary-muted: rgba(10, 132, 255, 0.18);
 
-  --color-secondary: #2C2C2E;
-  --color-secondary-hover: #1C1C1E;
-  --color-secondary-subtle: rgba(44, 44, 46, 0.08);
-
-  --color-success: #07CA6B;
-  --color-success-subtle: rgba(7, 202, 107, 0.1);
-  --color-warning: #E89558;
-  --color-warning-subtle: rgba(232, 149, 88, 0.1);
   --color-danger: #EA2143;
   --color-danger-subtle: rgba(234, 33, 67, 0.08);
-  --color-info: #1856FF;
-  --color-info-subtle: rgba(24, 86, 255, 0.08);
 
   --color-surface: #FFFFFF;
   --color-text: #1D1D1F;
@@ -28,12 +15,10 @@
   --color-text-subtle: #8E8E93;
 
   --color-bg: #EFF3F8;
-  --color-bg-subtle: #F7F9FC;
 
   /* --- Glass Tokens --- */
   --glass-bg: rgba(255, 255, 255, 0.5);
   --glass-bg-hover: rgba(255, 255, 255, 0.62);
-  --glass-bg-strong: rgba(255, 255, 255, 0.68);
   --glass-blur: 30px;
   --glass-saturate: 190%;
   --glass-border: rgba(255, 255, 255, 0.72);
@@ -49,10 +34,7 @@
   --text-sm: 0.8125rem;
   --text-base: 0.9375rem;
   --text-md: 1rem;
-  --text-lg: 1.125rem;
   --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 2rem;
   --text-4xl: 2.75rem;
 
   /* --- Spacing Scale (comfortable density) --- */
@@ -65,7 +47,6 @@
   --space-8: 32px;
   --space-10: 40px;
   --space-12: 48px;
-  --space-16: 64px;
 
   /* --- Border Radius --- */
   --radius-sm: 8px;
@@ -79,7 +60,6 @@
   --shadow-sm: 0 1px 2px rgba(29, 29, 31, 0.05), 0 1px 4px rgba(29, 29, 31, 0.06);
   --shadow-md: 0 6px 18px rgba(29, 29, 31, 0.08);
   --shadow-lg: 0 14px 36px rgba(29, 29, 31, 0.11);
-  --shadow-xl: 0 20px 56px rgba(29, 29, 31, 0.14);
   --shadow-glow: 0 0 24px rgba(10, 132, 255, 0.15);
   --shadow-glass: 0 18px 52px rgba(29, 29, 31, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.86);
 
@@ -146,4 +126,5 @@ p {
 :focus:not(:focus-visible) {
   outline: none;
 }
+
 
