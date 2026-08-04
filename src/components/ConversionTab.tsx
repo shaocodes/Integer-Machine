@@ -1,11 +1,55 @@
 import { useState } from 'react'
 import BitDisplay from './BitDisplay'
 import ErrorMessage from './ErrorMessage'
+import { attempt, convertDecimal, type DecimalConversion, type Representation } from '../lib'
+
+/** Renders one representation: the bit boxes, or why it is out of bounds. */
+function RepresentationCard({
+  representation,
+  label,
+  highlightSignBit = false,
+}: {
+  representation: Representation | undefined
+  label: string
+  highlightSignBit?: boolean
+}) {
+  if (!representation) {
+    return <div className="result-placeholder">Result will appear here</div>
+  }
+  if (!representation.ok) {
+    return <ErrorMessage message={representation.message} />
+  }
+  return (
+    <>
+      <BitDisplay bits={representation.binary} label={label} highlightSignBit={highlightSignBit} />
+      <div className="final-result">
+        <span className="result-badge">Hex: {representation.hex}</span>
+      </div>
+    </>
+  )
+}
 
 export default function ConversionTab() {
   const [decimalValue, setDecimalValue] = useState('')
   const [bitSize, setBitSize] = useState('8')
   const [customBitSize, setCustomBitSize] = useState('')
+  const [result, setResult] = useState<DecimalConversion | null>(null)
+  const [error, setError] = useState('')
+
+  const handleConvert = () => {
+    const bits = Number(bitSize === 'custom' ? customBitSize : bitSize)
+    // A malformed number or bad bit size throws; an out-of-range value does
+    // not — it comes back flagged on the individual representation instead.
+    const outcome = attempt(() => convertDecimal(decimalValue, bits))
+
+    if (outcome.ok) {
+      setResult(outcome.value)
+      setError('')
+    } else {
+      setResult(null)
+      setError(outcome.error.message)
+    }
+  }
 
   return (
     <div className="bento-grid">
@@ -22,6 +66,7 @@ export default function ConversionTab() {
               placeholder="Enter a decimal number (e.g. 42)"
               value={decimalValue}
               onChange={(e) => setDecimalValue(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleConvert()}
             />
           </div>
 
@@ -47,29 +92,73 @@ export default function ConversionTab() {
                 type="number"
                 className="input-field"
                 min="2"
-                max="128"
-                placeholder="2–128"
+                max="1024"
+                placeholder="2–1024"
                 value={customBitSize}
                 onChange={(e) => setCustomBitSize(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleConvert()}
               />
             </div>
           )}
         </div>
 
-        <button className="btn-primary" onClick={() => {}}>Convert</button>
-        <ErrorMessage message="" />
+        <button className="btn-primary" onClick={handleConvert}>Convert</button>
+        <ErrorMessage message={error} />
+
+        {result && (
+          <div className="final-result">
+            <span className="result-badge">
+              Unsigned range: {result.ranges.unsigned.min.toString()} to{' '}
+              {result.ranges.unsigned.max.toString()}
+            </span>
+            <span className="result-badge">
+              Signed range: {result.ranges.signed.min.toString()} to{' '}
+              {result.ranges.signed.max.toString()}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Unsigned Result Card */}
       <div className="glass-card">
         <h3 className="result-label">Unsigned Binary</h3>
-        <BitDisplay bits="" label="Unsigned Binary" />
+        <RepresentationCard representation={result?.unsigned} label="Unsigned Binary" />
       </div>
 
       {/* Signed Result Card */}
       <div className="glass-card">
-        <h3 className="result-label">Signed Binary (Sign-Magnitude)</h3>
-        <BitDisplay bits="" label="Signed Binary" highlightSignBit />
+        <h3 className="result-label">Signed Binary (Two's Complement)</h3>
+        <RepresentationCard
+          representation={result?.signed}
+          label="Signed Binary"
+          highlightSignBit
+        />
+        {result?.signedSteps && (
+          <div className="step-table-container">
+            <table className="step-table">
+              <thead>
+                <tr>
+                  <th>Two's Complement Derivation</th>
+                  <th>Bits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Magnitude</td>
+                  <td>{result.signedSteps.magnitude}</td>
+                </tr>
+                <tr>
+                  <td>Invert every bit</td>
+                  <td>{result.signedSteps.inverted}</td>
+                </tr>
+                <tr>
+                  <td>Add one</td>
+                  <td>{result.signedSteps.result}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   )
