@@ -6,11 +6,9 @@ import { attempt, convertDecimal, type DecimalConversion, type Representation } 
 /** Renders one representation: the bit boxes, or why it is out of bounds. */
 function RepresentationCard({
   representation,
-  label,
   highlightSignBit = false,
 }: {
   representation: Representation | undefined
-  label: string
   highlightSignBit?: boolean
 }) {
   if (!representation) {
@@ -21,7 +19,7 @@ function RepresentationCard({
   }
   return (
     <>
-      <BitDisplay bits={representation.binary} label={label} highlightSignBit={highlightSignBit} />
+      <BitDisplay bits={representation.binary} highlightSignBit={highlightSignBit} />
       <div className="final-result">
         <span className="result-badge">Hex: {representation.hex}</span>
       </div>
@@ -105,24 +103,13 @@ export default function ConversionTab() {
         <button className="btn-primary" onClick={handleConvert}>Convert</button>
         <ErrorMessage message={error} />
 
-        {result && (
-          <div className="final-result">
-            <span className="result-badge">
-              Unsigned range: {result.ranges.unsigned.min.toString()} to{' '}
-              {result.ranges.unsigned.max.toString()}
-            </span>
-            <span className="result-badge">
-              Signed range: {result.ranges.signed.min.toString()} to{' '}
-              {result.ranges.signed.max.toString()}
-            </span>
-          </div>
-        )}
+        {/* Result ranges removed */}
       </div>
 
       {/* Unsigned Result Card */}
       <div className="glass-card">
         <h3 className="result-label">Unsigned Binary</h3>
-        <RepresentationCard representation={result?.unsigned} label="Unsigned Binary" />
+        <RepresentationCard representation={result?.unsigned} />
       </div>
 
       {/* Signed Result Card */}
@@ -130,7 +117,6 @@ export default function ConversionTab() {
         <h3 className="result-label">Signed Binary (Two's Complement)</h3>
         <RepresentationCard
           representation={result?.signed}
-          label="Signed Binary"
           highlightSignBit
         />
         {result?.signedSteps && (

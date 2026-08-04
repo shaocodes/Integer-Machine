@@ -1,10 +1,9 @@
 interface BitDisplayProps {
   bits: string;
-  label: string;
   highlightSignBit?: boolean;
 }
 
-export default function BitDisplay({ bits, label, highlightSignBit = false }: BitDisplayProps) {
+export default function BitDisplay({ bits, highlightSignBit = false }: BitDisplayProps) {
   if (!bits) {
     return <div className="result-placeholder">Result will appear here</div>;
   }
@@ -13,7 +12,6 @@ export default function BitDisplay({ bits, label, highlightSignBit = false }: Bi
 
   return (
     <div className="bit-display">
-      <div className="bit-display-title">{label}</div>
       <div className="bit-display-row">
         {bits.split('').map((bit, index) => {
           const isSignBit = index === 0 && highlightSignBit;
