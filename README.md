@@ -30,7 +30,7 @@ Capture the program output for **all possible test cases**, including:
 - Different input variations
 - Other cases covering the specifications
 
-![Test Cases Screenshot](./test_result.png)
+![Test Cases Screenshot](test_results.png)
 
 ---
 
