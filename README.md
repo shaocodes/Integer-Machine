@@ -30,6 +30,8 @@ Capture the program output for **all possible test cases**, including:
 - Different input variations
 - Other cases covering the specifications
 
+![Test Cases Screenshot](./tests-screenshot.png)
+
 ---
 
 ## b.) Video Walkthrough
@@ -164,4 +166,4 @@ for how the algorithms work.
 | 1 | Conversion & repository | done |
 | 2 | Multiplier logic | done |
 | 3 | Division logic | done |
-| 4 | GUI & deployment | wired up; deployment pending |
+| 4 | GUI & deployment | done |
