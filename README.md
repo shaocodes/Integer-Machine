@@ -34,6 +34,7 @@ Capture the program output for **all possible test cases**, including:
 
 ## b.) Video Walkthrough
 
+LINK: https://youtu.be/3uOtCqKVlUA
 - **Duration:** 5–8 minutes
 - Upload the video to **YouTube**
 - Include the YouTube link in the **README.md**
