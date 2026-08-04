@@ -154,12 +154,3 @@ The GUI imports from `src/lib` — `convertDecimal()`, `convertBinary()` and
 `divide()` are the entry points, and `divide()` returns a `steps[]` array with
 one row per register operation. See [docs/analysis.md](docs/analysis.md) for how
 the algorithms work.
-
-## Team
-
-| # | Area | Status |
-| --- | --- | --- |
-| 1 | Conversion & repository | done |
-| 2 | Multiplier logic | pending |
-| 3 | Division logic | done |
-| 4 | GUI & deployment | in progress |
