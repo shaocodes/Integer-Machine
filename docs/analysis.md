@@ -1,13 +1,13 @@
 # Integer Machine — Analysis Write-up
 
 This document explains *how* the machine works and *why* each design decision
-was made. It covers the two areas implemented so far:
+was made. It covers all three areas of the machine:
 
 1. Decimal ↔ binary conversion, unsigned and signed (Team Member 1)
 2. Non-restoring division (Team Member 3)
+3. Sequential circuit multiplication (Team Member 2)
 
-The sequential-circuit multiplier (Team Member 2) is documented in
-[§4](#4-multiplication-sequential-circuit-multiplier) once implemented.
+All three are implemented and tested.
 
 ---
 
@@ -256,24 +256,104 @@ dividend, so it is −2.
 
 ---
 
-## 4. Multiplication (sequential circuit multiplier)
+## 4. Multiplication: the sequential circuit multiplier
 
-> Owned by Team Member 2 — to be written alongside `src/lib/multiplication.ts`.
-> The conversion helpers it needs (`readOperand`, `wrapToBits`, `bitsToSigned`,
-> `groupBits`) are already exported from `src/lib/conversion.ts`, and the
-> `DivisionStep` / `DivisionResult` shapes in `src/lib/division.ts` are a
-> ready-made template for the multiplier's step trace.
+### 4.1 Registers
+
+| Register | Width | Role |
+| --- | --- | --- |
+| `A` | n | Accumulator — the running high half of the product |
+| `Q` | n | Holds the multiplier; fills with the low half of the product |
+| `M` | n | Multiplicand; never changes |
+| `C` | 1 | Carry flip-flop for the n-bit adder |
+
+### 4.2 The algorithm
+
+```
+A ← 0, C ← 0, Q ← multiplier, M ← multiplicand
+
+repeat n times:
+    1. examine Q0, the low bit of Q
+       if Q0 = 1:  C,A ← A + M        (carry out lands in C)
+       if Q0 = 0:  no operation
+    2. shift [C,A,Q] one place right:
+       C → A's MSB, A's LSB → Q's MSB, Q0 falls off the end; C ← 0
+
+the product is the 2n-bit register pair A:Q
+```
+
+### 4.3 Why it works
+
+This is long multiplication rearranged for hardware. On paper you write one
+shifted partial product per multiplier bit and add them all at the end, which
+needs a 2n-bit adder and somewhere to store n partial products. The circuit
+instead adds M into A immediately and then shifts the running total *right*.
+Shifting the accumulator right by one is equivalent to shifting the next partial
+product left by one, so the adder never has to be wider than n bits.
+
+The elegant part is that Q does double duty. It is consumed one bit at a time
+from the right, while the low half of the product is shifted into it from the
+left. After n iterations the multiplier is completely used up and A:Q holds the
+full 2n-bit product — no separate product register is needed.
+
+**Why the carry flip-flop exists.** A + M can exceed n bits. C catches that
+carry and holds it for exactly one moment, until the shift moves it into A's
+MSB, after which it is cleared. Without C the high bit of every overflowing
+partial sum would be lost. It is easy to miss when hand-tracing small examples,
+because it only fires on large operands — 15 × 15 in 4 bits is the smallest
+case that exercises it, and the test suite checks that one explicitly.
+
+### 4.4 Signed operands
+
+Same approach as the divider: multiply the magnitudes, then apply the sign. The
+product is negative when the operand signs differ.
+
+Booth's algorithm is the usual alternative — it handles two's-complement
+operands directly and skips runs of identical bits — but the specification asks
+for the *sequential circuit multiplier*, so the sign is applied separately here.
+The GUI tab was originally labelled "Booth's Algorithm"; it now says
+"Sequential Circuit Multiplier" to match what the specification requires and
+what the code does.
+
+**No overflow case.** Unlike division, multiplication cannot overflow its
+output field: a 2n-bit product always holds the product of two n-bit operands.
+The widest signed case, (−2^(n−1)) × (−2^(n−1)) = 2^(2n−2), still fits the
+2n-bit signed range.
+
+### 4.5 Worked example — 5 × 3, 4-bit unsigned
+
+```
+#  It  Operation            C  A     Q
+-  --  -------------------  -  ----  ----
+1  -   Initialise           0  0000  0011
+2  1   C,A <- A + M         0  0101  0011
+3  1   Shift right [C,A,Q]  0  0010  1001
+4  2   C,A <- A + M         0  0111  1001
+5  2   Shift right [C,A,Q]  0  0011  1100
+6  3   No operation         0  0011  1100
+7  3   Shift right [C,A,Q]  0  0001  1110
+8  4   No operation         0  0001  1110
+9  4   Shift right [C,A,Q]  0  0000  1111
+
+Product: 15 (00001111)
+A:Q    : 0000 1111
+```
+
+Iterations 1 and 2 see Q0 = 1 and add; iterations 3 and 4 see Q0 = 0 and skip.
+Watch Q from the right: `0011` loses a bit per shift while product bits arrive
+from the left, ending as `1111` — the low half of 15.
 
 ---
 
 ## 5. Verification strategy
 
-`npm test` runs 49 tests with Node's built-in runner — no test framework
+`npm test` runs 72 tests with Node's built-in runner — no test framework
 dependency, and Node executes the TypeScript directly.
 
-Beyond the hand-checked cases, the divider is verified by an **exhaustive
-sweep**: every 6-bit operand pair in both modes (4,032 unsigned + 4,032 signed
-divisions). Each one is checked against four independent properties:
+Beyond the hand-checked cases, both arithmetic modules are verified by an
+**exhaustive sweep**: every 6-bit operand pair in both modes — 8,064 divisions
+and 8,320 multiplications. Each division is checked against four independent
+properties:
 
 1. quotient and remainder match JavaScript's own `bigint` division
 2. quotient × divisor + remainder = dividend
@@ -281,6 +361,10 @@ divisions). Each one is checked against four independent properties:
 4. the trace is well-formed — exactly n shifts, exactly n quotient bits, at most
    one restore, every rendered register round-trips to its exact value, and the
    Q0 column read downward reproduces the quotient
+
+Multiplications are checked the same way: the product matches bigint
+multiplication, the A:Q register pair holds the product magnitude, there is one
+add-or-skip row and one shift row per bit, and C is always clear after a shift.
 
 Property 4 matters as much as property 1 for this project: the deliverable is
 the *step-by-step solution*, not just the answer, so the trace is tested as
@@ -306,6 +390,24 @@ Useful as a checklist when capturing screenshots and recording the walkthrough.
 | Beyond 64-bit | 2^127 − 1, 128 bits | 127 ones |
 | Malformed | `3.5`, `12abc`, `0x1F` | `INVALID_DECIMAL` |
 | Malformed binary | `1021`, 9 digits at 8 bits | `INVALID_BINARY`, `BINARY_TOO_LONG` |
+
+**Multiplication**
+
+| Case | Input | Expected |
+| --- | --- | --- |
+| Normal | 13 × 11, 8 bits unsigned | 143 |
+| Textbook | 5 × 3, 4 bits unsigned | 15, A:Q = `0000 1111` |
+| Zero operand | 0 × 200, 200 × 0 | 0 |
+| Multiply by one | 173 × 1 | 173 |
+| Power of two | 1 × 128, 8 bits | one add, seven skips |
+| All-ones multiplier | 200 × 255, 8 bits | eight adds, 51000 |
+| Largest 8-bit | 255 × 255 | 65025 (`1111111000000001`) |
+| Carry flip-flop | 15 × 15, 4 bits | 225, C set during an add |
+| Smallest width | 3 × 3, 2 bits | 9 (`1001`) |
+| Signed, four sign pairs | ±5 × ±3, 8 bits | ±15 |
+| Signed edge | −128 × −128, 8 bits | 16384 |
+| Overflow | none possible | 2n-bit product always fits |
+| 64-bit | (2^64 − 1)², 64 bits | 128-bit product |
 
 **Division**
 

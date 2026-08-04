@@ -12,6 +12,5 @@
 
 export * from './errors.ts'
 export * from './conversion.ts'
+export * from './multiplication.ts'
 export * from './division.ts'
-// Team Member 2's sequential multiplier plugs in here:
-// export * from './multiplication.ts'

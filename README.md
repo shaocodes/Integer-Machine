@@ -141,16 +141,26 @@ npm run build   # production build
 ```
 src/
   lib/          computation logic — pure functions, no DOM
-    conversion.ts   decimal <-> binary, unsigned & signed, 2-1024 bits
-    division.ts     non-restoring division + step-by-step trace
-    errors.ts       shared error type and codes
+    conversion.ts      decimal <-> binary, unsigned & signed, 2-1024 bits
+    multiplication.ts  sequential circuit multiplier + step-by-step trace
+    division.ts        non-restoring division + step-by-step trace
+    errors.ts          shared error type and codes
   components/   GUI
 tests/          test suites for src/lib
 docs/
   analysis.md   write-up: design decisions, algorithms, test-case matrix
 ```
 
-The GUI imports from `src/lib` — `convertDecimal()`, `convertBinary()` and
-`divide()` are the entry points, and `divide()` returns a `steps[]` array with
-one row per register operation. See [docs/analysis.md](docs/analysis.md) for how
-the algorithms work.
+The GUI imports from `src/lib` — `convertDecimal()`, `multiply()` and `divide()`
+are the entry points, and the two arithmetic functions return a `steps[]` array
+with one row per register operation. See [docs/analysis.md](docs/analysis.md)
+for how the algorithms work.
+
+## Team
+
+| # | Area | Status |
+| --- | --- | --- |
+| 1 | Conversion & repository | done |
+| 2 | Multiplier logic | done |
+| 3 | Division logic | done |
+| 4 | GUI & deployment | wired up; deployment pending |

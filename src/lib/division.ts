@@ -56,13 +56,12 @@ import {
   assertValidBits,
   bitsToUnsigned,
   describeRange,
-  groupBits,
+  makeView,
   rangeOf,
   readOperand,
-  toSignedBinary,
-  toUnsignedBinary,
   wrapToBits,
   type OperandInput,
+  type ValueView,
 } from './conversion.ts'
 import { MachineError } from './errors.ts'
 
@@ -104,13 +103,6 @@ export type DivisionStep = {
   q0: 0 | 1 | null
   /** Plain-language explanation of why this row happened. */
   note: string
-}
-
-/** A number reported in both bases. */
-export type ValueView = {
-  decimal: string
-  binary: string
-  grouped: string
 }
 
 /** Sign bookkeeping for signed division; `null` in unsigned mode. */
@@ -313,10 +305,7 @@ export function divideValues(
     )
   }
 
-  const view = (value: bigint): ValueView => {
-    const binary = signed ? toSignedBinary(value, bits) : toUnsignedBinary(value, bits)
-    return { decimal: value.toString(), binary, grouped: groupBits(binary) }
-  }
+  const view = (value: bigint): ValueView => makeView(value, bits, signed)
 
   return {
     mode,

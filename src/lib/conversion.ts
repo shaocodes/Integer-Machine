@@ -379,6 +379,26 @@ export function convertBinary(text: string, bits: number): BinaryConversion {
 }
 
 // ---------------------------------------------------------------------------
+// Shared result helpers for the multiplier / divider modules
+// ---------------------------------------------------------------------------
+
+/** A computed number reported in both bases. */
+export type ValueView = {
+  decimal: string
+  binary: string
+  grouped: string
+}
+
+/**
+ * Renders a result value for display, validating it against the field width.
+ * Shared by the divider and the multiplier so their outputs stay consistent.
+ */
+export function makeView(value: bigint, bits: number, signed: boolean): ValueView {
+  const binary = signed ? toSignedBinary(value, bits) : toUnsignedBinary(value, bits)
+  return { decimal: value.toString(), binary, grouped: groupBits(binary) }
+}
+
+// ---------------------------------------------------------------------------
 // Operand helper shared with the multiplier / divider modules
 // ---------------------------------------------------------------------------
 
