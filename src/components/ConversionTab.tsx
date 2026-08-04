@@ -6,11 +6,17 @@ import { attempt, convertDecimal, type DecimalConversion, type Representation } 
 /** Renders one representation: the bit boxes, or why it is out of bounds. */
 function RepresentationCard({
   representation,
+<<<<<<< HEAD
   label,
   highlightSignBit = false,
 }: {
   representation: Representation | undefined
   label: string
+=======
+  highlightSignBit = false,
+}: {
+  representation: Representation | undefined
+>>>>>>> 17ad45012fe54e1bd80f6b032d1bb6ebe0da74a6
   highlightSignBit?: boolean
 }) {
   if (!representation) {
@@ -21,7 +27,11 @@ function RepresentationCard({
   }
   return (
     <>
+<<<<<<< HEAD
       <BitDisplay bits={representation.binary} label={label} highlightSignBit={highlightSignBit} />
+=======
+      <BitDisplay bits={representation.binary} highlightSignBit={highlightSignBit} />
+>>>>>>> 17ad45012fe54e1bd80f6b032d1bb6ebe0da74a6
       <div className="final-result">
         <span className="result-badge">Hex: {representation.hex}</span>
       </div>
@@ -105,6 +115,7 @@ export default function ConversionTab() {
         <button className="btn-primary" onClick={handleConvert}>Convert</button>
         <ErrorMessage message={error} />
 
+<<<<<<< HEAD
         {result && (
           <div className="final-result">
             <span className="result-badge">
@@ -117,12 +128,19 @@ export default function ConversionTab() {
             </span>
           </div>
         )}
+=======
+        {/* Result ranges removed */}
+>>>>>>> 17ad45012fe54e1bd80f6b032d1bb6ebe0da74a6
       </div>
 
       {/* Unsigned Result Card */}
       <div className="glass-card">
         <h3 className="result-label">Unsigned Binary</h3>
+<<<<<<< HEAD
         <RepresentationCard representation={result?.unsigned} label="Unsigned Binary" />
+=======
+        <RepresentationCard representation={result?.unsigned} />
+>>>>>>> 17ad45012fe54e1bd80f6b032d1bb6ebe0da74a6
       </div>
 
       {/* Signed Result Card */}
@@ -130,7 +148,10 @@ export default function ConversionTab() {
         <h3 className="result-label">Signed Binary (Two's Complement)</h3>
         <RepresentationCard
           representation={result?.signed}
+<<<<<<< HEAD
           label="Signed Binary"
+=======
+>>>>>>> 17ad45012fe54e1bd80f6b032d1bb6ebe0da74a6
           highlightSignBit
         />
         {result?.signedSteps && (

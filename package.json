@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+<<<<<<< HEAD
     "test": "node --test \"tests/*.test.ts\"",
+=======
+    "test": "node --experimental-strip-types --test \"tests/*.test.ts\"",
+>>>>>>> 17ad45012fe54e1bd80f6b032d1bb6ebe0da74a6
     "preview": "vite preview"
   },
   "dependencies": {
