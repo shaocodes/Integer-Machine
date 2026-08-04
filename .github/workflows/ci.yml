@@ -8,7 +8,7 @@ on:
 
 jobs:
   ci:
-    name: Typecheck · Lint · Build
+    name: Typecheck · Lint · Test · Build
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +29,9 @@ jobs:
 
       - name: Lint
         run: npx oxlint
+
+      - name: Test
+        run: npm test
 
       - name: Build
         run: npx vite build --base /Integer-Machine/
