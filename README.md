@@ -30,7 +30,7 @@ Capture the program output for **all possible test cases**, including:
 - Different input variations
 - Other cases covering the specifications
 
-![Test Cases Screenshot](./tests-result.png)
+![Test Cases Screenshot](./tests_result.png)
 
 ---
 
@@ -126,7 +126,7 @@ The program must include **error checking for out-of-bounds values**.
 
 # Project Documentation
 
-**Live site:** ![Test Cases Screenshot](./tests-result.png) · **Video walkthrough:** (https://youtu.be/3uOtCqKVlUA)
+**Live site:** ![Test Cases Screenshot](./tests_result.png) · **Video walkthrough:** (https://youtu.be/3uOtCqKVlUA)
 
 ## Running it
 
